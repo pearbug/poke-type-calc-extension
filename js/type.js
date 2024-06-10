@@ -1,4 +1,13 @@
-var typeList = [
+class TypeState{
+    isSelectedTypeSet = new Set();
+
+    getSelectedTypesToText(){
+        return [...this.isSelectedTypeSet].map(typeIdx => typeList[typeIdx][0]);
+    }
+}
+const typeState = new TypeState();
+
+let typeList = [
     ["노말", "Normal"], ["불꽃", "Fire"], ["물", "Water"], ["풀", "Grass"], ["전기", "Electric"], ["얼음", "Ice"], 
     ["격투", "Fighting"], ["독", "Poison"], ["땅", "Ground"], ["비행", "Flying"], ["에스퍼", "Psychic"], ["벌레", "Bug"], 
     ["바위", "Rock"], ["고스트", "Ghost"], ["드래곤", "Dragon"], ["악", "Dark"], ["강철", "Steel"], ["페어리", "Fairy"]
@@ -27,57 +36,57 @@ const typeChart = [
 ];
 
 function createCheckboxList() {
-    var checkboxContainer = document.querySelector(".checkbox-grid");
+    const checkboxContainer = document.querySelector(".checkbox-grid");
 
-    for (var i = 0; i < typeList.length; i++) {
-        var label = document.createElement("label");
-        var checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = i;
-        checkbox.name = "typeCheckbox";
-        checkbox.onchange = calculateTypeEffectiveness; // 체크박스 변경 시 효과 계산
-        label.appendChild(checkbox);
+    for (let i = 0; i < typeList.length; i++) {
+        const button = document.createElement("button");
+        const label = document.createElement("label");
+
+        button.addEventListener('click', function (){
+            if (typeState.isSelectedTypeSet.has(i)){
+                typeState.isSelectedTypeSet.delete(i); // 체크 해제된 경우, 값 삭제
+            }else{
+                typeState.isSelectedTypeSet.add(i); // 체크된 경우, 값 추가
+            }
+            this.classList.toggle('active');
+            calculateTypeEffectiveness(); // 계산
+        });
+
         label.appendChild(document.createTextNode(typeList[i][0])); // 첫 번째 텍스트 추가
-        label.appendChild(document.createElement("br")); // 줄 바꿈 요소 추가
-        label.appendChild(document.createTextNode(typeList[i][1])); // 두 번째 텍스트 추가
-        checkboxContainer.appendChild(label);
+        // label.appendChild(document.createElement("br")); // 줄 바꿈 요소 추가
+        // label.appendChild(document.createTextNode(typeList[i][1])); // 두 번째 텍스트 추가
+        button.appendChild(label)
+
+        checkboxContainer.appendChild(button);
     }
 }
 
 function calculateAtkTypeEffectiveness() {
-    var checkboxes = document.getElementsByName("typeCheckbox");
-    var effectiveness = new Array(typeList.length).fill(1);
+    let effectiveness = new Array(typeList.length).fill(1);
 
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            var typeIndex = checkboxes[i].value;
-            for (var j = 0; j < typeList.length; j++) {
-                effectiveness[j] *= typeChart[typeIndex][j];
-            }
-        }
-    }
+    typeState.isSelectedTypeSet.forEach((typeIndex)=>{
+        typeList.forEach((_, j)=>{
+            effectiveness[j] *= typeChart[typeIndex][j];
+        })
+    })
 
     displayEffectivenessResult(effectiveness, "atkEffectivenessResult");
 }
 
 function calculateDefTypeEffectiveness() {
-    var checkboxes = document.getElementsByName("typeCheckbox");
-    var effectiveness = new Array(typeList.length).fill(1);
+    let effectiveness = new Array(typeList.length).fill(1);
 
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            var typeIndex = checkboxes[i].value;
-            for (var j = 0; j < typeList.length; j++) {
-                effectiveness[j] *= typeChart[j][typeIndex]; // 인덱스를 반대로 사용
-            }
-        }
-    }
+    typeState.isSelectedTypeSet.forEach((typeIndex)=>{
+        typeList.forEach((_, j)=>{
+            effectiveness[j] *= typeChart[j][typeIndex];
+        })
+    })
 
     displayEffectivenessResult(effectiveness, "defEffectivenessResult");
 }
 
 function displayEffectivenessResult(effectiveness, containerId) {
-    var resultMap = {
+    const resultMap = {
         "4배": [],
         "2배": [],
         "1배": [],
@@ -86,9 +95,9 @@ function displayEffectivenessResult(effectiveness, containerId) {
         "0배": []
     };
 
-    for (var i = 0; i < effectiveness.length; i++) {
-        var value = effectiveness[i];
-        var typeName = `${typeList[i][0]}`; //(${typeList[i][1]})`
+    for (let i = 0; i < effectiveness.length; i++) {
+        let value = effectiveness[i];
+        let typeName = `${typeList[i][0]}`; //(${typeList[i][1]})`
 
         if (value === 4) resultMap["4배"].push(typeName);
         else if (value === 2) resultMap["2배"].push(typeName);
@@ -98,10 +107,10 @@ function displayEffectivenessResult(effectiveness, containerId) {
         else if (value === 0) resultMap["0배"].push(typeName);
     }
 
-    var resultHtml = "<table><tr><th>4배</th><th>2배</th><th>1배</th><th>0.5배</th><th>0.25배</th><th>0배</th></tr>";
+    let resultHtml = "<table><tr><th>4배</th><th>2배</th><th>1배</th><th>0.5배</th><th>0.25배</th><th>0배</th></tr>";
     resultHtml += "<tr>";
 
-    for (var key in resultMap) {
+    for (let key in resultMap) {
         resultHtml += "<td>" + (resultMap[key].length ? resultMap[key].join("<br>") : "&nbsp;") + "</td>";
     }
 
@@ -112,28 +121,16 @@ function displayEffectivenessResult(effectiveness, containerId) {
 function calculateTypeEffectiveness() {
     calculateAtkTypeEffectiveness();
     calculateDefTypeEffectiveness();
-
-    var checkboxes = document.getElementsByName("typeCheckbox");
-    var selectedTypes = [];
-
-    var anyCheckboxChecked = Array.from(checkboxes).some(function(checkbox) {
-        return checkbox.checked;
-    });
-
-    if (!anyCheckboxChecked) {
+    console.log(typeState.isSelectedTypeSet);
+    if (typeState.isSelectedTypeSet.size === 0) {
         document.getElementById("atkEffectivenessResult").innerHTML = "";
         document.getElementById("defEffectivenessResult").innerHTML = "";
     }
 
-    // 체크된 체크박스의 값을 가져와 배열에 추가
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            selectedTypes.push(typeList[i][0]); // 첫 번째 값 추가
-        }
-    }
+    const selectedTypes = typeState.getSelectedTypesToText();
 
     // 버튼 앞에 새로운 라벨 설정
-    var buttonLabel = selectedTypes.join(", ");
+    const buttonLabel = selectedTypes.join(", ");
     document.getElementById("buttonLabel").textContent = buttonLabel;
 }
 
