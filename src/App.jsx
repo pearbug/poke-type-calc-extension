@@ -3,7 +3,7 @@ import './css/reset.css'
 import './index.css'
 import TypeCard from "./components/TypeCard/index.jsx";
 import {calculateAtkTypeEffectiveness, calculateDefTypeEffectiveness} from "./index.js";
-import {krTypes, usTypes} from "./data/types.js";
+import {krTypes, typeColors, usTypes} from "./data/types.js";
 
 function App() {
     const [selectedTypes, setSelectedTypes] = useState(new Set());  // 타입 선택
@@ -66,6 +66,10 @@ function App() {
                                 onClick={() => onClickTypeCard(index)}
                                 index={index}
                                 text={type}
+                                style={selectedTypes.has(index) ? {
+                                    backgroundColor: typeColors[index],
+                                    boxShadow: `0 0 8px ${typeColors[index]}70`
+                                } : {}}
                                 key={type}/>)}
                     </div>
                 </div>

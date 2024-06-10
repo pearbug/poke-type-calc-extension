@@ -47,9 +47,11 @@ hr {
 }
 
 .checkbox-grid button.checked {
-    border: 2px solid rgb(59, 130, 246);
+    border: 2px solid #60a5fa;
     color: #f8fafc;
+    font-weight: bold;
     background-color: rgb(59, 130, 246);
+
 }
 
 .checkbox-grid button img {
