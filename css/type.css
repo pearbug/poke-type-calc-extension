@@ -1,17 +1,41 @@
 body {
-    width: 500px; /* 원하는 width 값으로 변경 */
+    /*width: 500px; !* 원하는 width 값으로 변경 *!*/
+    padding: 8px;
+}
+.flex{
+    display: flex;
 }
 .checkbox-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 columns */
-    gap: 10px; /* space between grid items */
-}
-.checkbox-grid label {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 4px; /* space between grid items */
 }
-.checkbox-grid input {
-    margin-right: 8px;
+.checkbox-grid button {
+    display: flex;
+    width: 30px;
+    padding: 2px 4px 8px 4px;
+    flex-direction:column;
+    align-items: center;
+
+    border-radius: 100px;
+    outline: none;
+    border: 2px solid #e2e8f090;
+    background-color: #e2e8f090;
+    gap: 4px;
+}
+.checkbox-grid button.checked{
+    border: 2px solid rgb(59, 130, 246);
+    color: #f8fafc;
+    background-color: rgb(59, 130, 246);
+}
+.checkbox-grid button img {
+    width: 18px;
+    height: 18px;
+}
+.checkbox-grid button label {
+    writing-mode: vertical-rl;
 }
 .hidden {
     display: none;
@@ -31,7 +55,7 @@ body {
 }
 #checkboxContainer, #atkContainer, #defContainer {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
 }
 table {
     width: 100%;

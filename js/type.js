@@ -41,6 +41,9 @@ function createCheckboxList() {
     for (let i = 0; i < typeList.length; i++) {
         const button = document.createElement("button");
         const label = document.createElement("label");
+        const img = document.createElement('img'); // 이미지 요소 생성
+        img.src = '../images/types/stone.png';
+        img.alt = 'Type Image'; // 대체 텍스트 설정
 
         button.addEventListener('click', function (){
             if (typeState.isSelectedTypeSet.has(i)){
@@ -48,14 +51,19 @@ function createCheckboxList() {
             }else{
                 typeState.isSelectedTypeSet.add(i); // 체크된 경우, 값 추가
             }
-            this.classList.toggle('active');
+            this.classList.toggle('checked');
             calculateTypeEffectiveness(); // 계산
         });
 
         label.appendChild(document.createTextNode(typeList[i][0])); // 첫 번째 텍스트 추가
         // label.appendChild(document.createElement("br")); // 줄 바꿈 요소 추가
         // label.appendChild(document.createTextNode(typeList[i][1])); // 두 번째 텍스트 추가
-        button.appendChild(label)
+
+        button.appendChild(img);
+        const flex = document.createElement("div");
+        flex.classList.toggle('flex');
+        flex.appendChild(label);
+        button.appendChild(flex);
 
         checkboxContainer.appendChild(button);
     }
