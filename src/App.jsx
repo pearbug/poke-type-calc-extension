@@ -38,10 +38,10 @@ function App() {
     // 공격 모드에 따라 계산 후 출력
     useEffect(function displayCalculateResult() {
         if (isSelectedDef) {
-            const data = calculateAtkTypeEffectiveness(selectedTypes);
+            const data = calculateDefTypeEffectiveness(selectedTypes);
             setResultData(data)
         } else {
-            const data = calculateDefTypeEffectiveness(selectedTypes);
+            const data = calculateAtkTypeEffectiveness(selectedTypes);
             setResultData(data)
         }
     }, [selectedTypes, isSelectedDef]);
