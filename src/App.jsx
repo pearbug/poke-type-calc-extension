@@ -9,8 +9,8 @@ function App() {
     const [selectedTypes, setSelectedTypes] = useState(new Set());  // 타입 선택
     const [isSelectedDef, setIsSelectedDef] = useState(true);   // 공격할껀지 선택
     const [resultData, setResultData] = useState();   // 결과 데이터
-    const [language, setLanguage] = useState('ko-KR');   // 결과 데이터
-    const [types, setTypes] = useState();   // 결과 데이터
+    const [i18nLanguage, setI18nLanguage] = useState('ko-KR');  // 'ko-KR' or 'en-US'
+    const [types, setTypes] = useState();   // 언어 데이터
 
     // 타입 카드를 눌렀을 때 이벤트
     function onClickTypeCard(index) {
@@ -32,11 +32,11 @@ function App() {
 
     // language button event
     function onClickLanguageButton(e) {
-        setLanguage(e.target.value)
+        setI18nLanguage(e.target.value)
     }
 
     // 공격 모드에 따라 계산 후 출력
-    useEffect(function displayResult() {
+    useEffect(function displayCalculateResult() {
         if (isSelectedDef) {
             const data = calculateAtkTypeEffectiveness(selectedTypes);
             setResultData(data)
@@ -46,13 +46,14 @@ function App() {
         }
     }, [selectedTypes, isSelectedDef]);
 
-    useEffect(function displayResult() {
-        if (language === 'ko-KR') {
+    // 언어변경
+    useEffect(function displayLanguageResult() {
+        if (i18nLanguage === 'ko-KR') {
             setTypes(krTypes);
-        } else if (language === 'en-US') {
+        } else if (i18nLanguage === 'en-US') {
             setTypes(usTypes);
         }
-    }, [language]);
+    }, [i18nLanguage]);
 
     return (
         <>
