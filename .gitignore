@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/webstorm,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=webstorm,react
 
+.gitconfig
+dist.crx
+dist.pem
+
 ### react ###
 .DS_*
 *.log
