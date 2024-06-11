@@ -4,6 +4,7 @@
 .gitconfig
 dist.crx
 dist.pem
+dist
 
 ### react ###
 .DS_*
