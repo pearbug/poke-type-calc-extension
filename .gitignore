@@ -5,6 +5,7 @@
 dist.crx
 dist.pem
 dist
+dist-deploy
 
 ### react ###
 .DS_*
