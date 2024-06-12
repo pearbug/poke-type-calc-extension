@@ -8,6 +8,7 @@ const deployConfig = defineConfig({
     build: {
         outDir: 'dist-deploy'
     }
+
 });
 
 // extensions 빌드 설정
@@ -29,5 +30,5 @@ export default defineConfig(({mode}) => {
     if (mode === 'deploy') {
         return deployConfig;
     }
-    return deployConfig;
+    return extensionsConfig;
 });
