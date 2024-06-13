@@ -2,6 +2,7 @@ import TypeCard from "../components/TypeCard/index.jsx";
 import {krTypes, typeColors, usTypes} from "../data/types.js";
 import {useEffect, useState} from "react";
 import {calculateAtkTypeEffectiveness, calculateDefTypeEffectiveness} from "../index.js";
+import {StyledResult} from "../css/StyledResult.js";
 
 const Calculator = () =>{
     const [selectedTypes, setSelectedTypes] = useState(new Set());  // 타입 선택
@@ -93,26 +94,27 @@ const Calculator = () =>{
 
         <hr/>
 
-        {selectedTypes.size > 0 && resultData &&
-            <div id="resultContainer">
-                {Object.keys(resultData).map((key) =>
-                    <ul key={key}>
-                        <h3>{key}</h3>
-                        {resultData[key].map((index) =>
-                            <li key={index}><TypeCard
-                                index={index}
-                                text={`${types[index]}`}
-                            /></li>
-                        )}
-                    </ul>)
-                }
-            </div>
-        }
-
-        <select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>
-            <option value="ko-KR">Korean</option>
-            <option value="en-US">English</option>
-        </select>
+        <StyledResult ref={resultScrollRef}>
+            {selectedTypes.size > 0 && resultData &&
+                <div id="resultContainer">
+                    {Object.keys(resultData).map((key) =>
+                        <ul key={key}>
+                            <h3>{key}</h3>
+                            {resultData[key].map((index) =>
+                                <li key={index}><TypeCard
+                                    index={index}
+                                    text={`${types[index]}`}
+                                /></li>
+                            )}
+                        </ul>)
+                    }
+                </div>
+            }
+        </StyledResult>
+        {/*<select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>*/}
+        {/*    <option value="ko-KR">Korean</option>*/}
+        {/*    <option value="en-US">English</option>*/}
+        {/*</select>*/}
     </div>
 }
 
