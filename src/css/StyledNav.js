@@ -2,11 +2,21 @@ import styled from "styled-components";
 
 export const StyledNav = styled.nav`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
   font-weight: 500;
+
+  img {
+    height: 14px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+  }
 
   & a {
     text-decoration: none;
