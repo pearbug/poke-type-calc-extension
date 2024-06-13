@@ -4,7 +4,7 @@ export const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin: 0 6px 6px 8px;
   font-weight: 500;
 
   img {
