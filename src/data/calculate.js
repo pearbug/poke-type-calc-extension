@@ -1,5 +1,5 @@
 // 이차원 배열로 상성 가중치 정의
-import {typeChart, usTypes} from "./data/types.js";
+import {typeChart, usTypes} from "./types.js";
 
 export function calculateAtkTypeEffectiveness(isSelectedTypeSet) {
     let effectiveness = new Array(usTypes.length).fill(1);

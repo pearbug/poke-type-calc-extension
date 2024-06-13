@@ -1,8 +1,8 @@
-import TypeCard from "../components/TypeCard/index.jsx";
-import {krTypes, typeColors, usTypes} from "../data/types.js";
+import TypeCard from "../../components/TypeCard/index.jsx";
+import {krTypes, typeColors, usTypes} from "../../data/types.js";
 import {useEffect, useRef, useState} from "react";
-import {calculateAtkTypeEffectiveness, calculateDefTypeEffectiveness} from "../index.js";
-import {StyledResult} from "../css/StyledResult.js";
+import {calculateAtkTypeEffectiveness, calculateDefTypeEffectiveness} from "../../data/calculate.js";
+import {CalculatorContainer, MidContainer, ResultContainer, TypeSelectContainer} from "./CalculatorStyle.js";
 
 const Calculator = () => {
     const [selectedTypes, setSelectedTypes] = useState(() => {
@@ -65,27 +65,23 @@ const Calculator = () => {
         localStorage.setItem('mySet', JSON.stringify(array)); // 배열을 JSON 문자열로 저장
     }, [selectedTypes]);
 
-    return <div className="flex-container">
-        <div id="checkboxContainer">
-            <div className="checkbox-grid">
-                {types && types.map((type, index) =>
-                    <TypeCard
-                        className={selectedTypes.has(index) ? 'checked' : ''}
-                        onClick={() => onClickTypeCard(index)}
-                        index={index}
-                        text={type}
-                        style={selectedTypes.has(index) ? {
-                            backgroundColor: typeColors[index],
-                            boxShadow: `0 0 8px ${typeColors[index]}70`
-                        } : {}}
-                        key={type}/>)}
-            </div>
-        </div>
+    return <CalculatorContainer>
+        <TypeSelectContainer>
+            {types && types.map((type, index) =>
+                <TypeCard
+                    className={selectedTypes.has(index) ? 'checked' : ''}
+                    onClick={() => onClickTypeCard(index)}
+                    index={index}
+                    text={type}
+                    style={selectedTypes.has(index) ? {
+                        backgroundColor: typeColors[index],
+                        boxShadow: `0 0 8px ${typeColors[index]}70`
+                    } : {}}
+                    key={type}/>)}
+        </TypeSelectContainer>
 
-        <hr/>
-
-        <div id="midContainer">
-            <div id="buttonLabel">
+        <MidContainer>
+            <div id="selectedType">
                 {types && selectedTypes.size >= 0 && [...selectedTypes].map((typeIdx) => (
                         <TypeCard
                             className={selectedTypes.has(typeIdx) ? 'checked' : ''}
@@ -103,32 +99,32 @@ const Calculator = () => {
             <button onClick={() => setSelectedMode("ATK")} className={selectedMode === "ATK" ? 'active' : ''}>타입한테 처맞을
                 때
             </button>
-        </div>
+        </MidContainer>
 
-        <hr/>
-
-        <StyledResult ref={resultScrollRef}>
-            {selectedTypes.size > 0 && resultData &&
-                <div id="resultContainer">
-                    {Object.keys(resultData).map((key) =>
-                        <ul key={key}>
-                            <h3>{key}</h3>
-                            {resultData[key].map((index) =>
-                                <li key={index}><TypeCard
-                                    index={index}
-                                    text={`${types[index]}`}
-                                /></li>
-                            )}
-                        </ul>)
-                    }
-                </div>
-            }
-        </StyledResult>
+        <ResultContainer ref={resultScrollRef}>
+            <ul id={'resultKey'}>
+                {selectedTypes.size > 0 && resultData && Object.keys(resultData).map((key, keyIdx) =>
+                    <li key={key} className={`key-${keyIdx}`}>
+                        <h3>{key}</h3>
+                    </li>)}
+            </ul>
+            <ul id={'resultValue'}>
+                {selectedTypes.size > 0 && resultData && Object.keys(resultData).map((key, keyIdx) =>
+                    <li key={key} className={`key-${keyIdx}`}>
+                        {resultData[key].map((index) =>
+                            <TypeCard
+                                key={index}
+                                index={index}
+                                text={`${types[index]}`}/>
+                        )}
+                    </li>)}
+            </ul>
+        </ResultContainer>
         {/*<select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>*/}
         {/*    <option value="ko-KR">Korean</option>*/}
         {/*    <option value="en-US">English</option>*/}
         {/*</select>*/}
-    </div>
+    </CalculatorContainer>
 }
 
 export default Calculator
