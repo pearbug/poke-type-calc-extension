@@ -134,9 +134,9 @@ export const ResultContainer = styled.div`
     }
 
     &#resultKey {
-      overflow-y: scroll;
+      padding-right: 4px;
       @media (min-height: 600px) {
-        overflow-y: auto;
+        padding-right: 0;
       }
 
       li {
