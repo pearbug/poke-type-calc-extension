@@ -44,8 +44,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # dist 디렉터리 업로드
-          path: './dist'
+          # deploy 디렉터리 업로드
+          path: './dist-deploy'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
