@@ -3,6 +3,7 @@ import {krTypes, typeColors, usTypes} from "../../data/types.js";
 import {useEffect, useRef, useState} from "react";
 import {calculateAtkTypeEffectiveness, calculateDefTypeEffectiveness} from "../../data/calculate.js";
 import {CalculatorContainer, MidContainer, ResultContainer, TypeSelectContainer} from "./CalculatorStyle.js";
+import {IoTrash} from "react-icons/io5";
 
 const Calculator = () => {
     const [selectedTypes, setSelectedTypes] = useState(() => {
@@ -60,7 +61,7 @@ const Calculator = () => {
         }
     }, [i18nLanguage]);
 
-    useEffect(() => {
+    useEffect(function saveSelectedInLocalStorage() {
         const array = Array.from(selectedTypes); // Set을 배열로 변환
         localStorage.setItem('mySet', JSON.stringify(array)); // 배열을 JSON 문자열로 저장
     }, [selectedTypes]);
@@ -99,6 +100,8 @@ const Calculator = () => {
             <button onClick={() => setSelectedMode("ATK")} className={selectedMode === "ATK" ? 'active' : ''}>타입한테 처맞을
                 때
             </button>
+            &nbsp;
+            <IoTrash className={'trashButton'} onClick={() => setSelectedTypes(new Set())}/>
         </MidContainer>
 
         <ResultContainer ref={resultScrollRef}>
@@ -120,10 +123,10 @@ const Calculator = () => {
                     </li>)}
             </ul>
         </ResultContainer>
-        <select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>
-            <option value="ko-KR">Korean</option>
-            <option value="en-US">English</option>
-        </select>
+        {/*<select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>*/}
+        {/*    <option value="ko-KR">Korean</option>*/}
+        {/*    <option value="en-US">English</option>*/}
+        {/*</select>*/}
     </CalculatorContainer>
 }
 
