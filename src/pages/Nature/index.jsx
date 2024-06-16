@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import {TableContainer} from "./NatureStyle.js";
 
 const natures = [
     {en: 'Hardy', kr: '노력', increase: 'Attack', decrease: 'Attack'},
@@ -46,102 +46,31 @@ const Nature = () => {
     };
 
     return (
-        <div className="table-container">
-            <StyledTable>
-                <thead>
-                <tr>
-                    <th></th>
-                    {stats.map((stat, index) =>
-                        <th key={stat}>
-                            <div className={`${stat} decrease`}>
-                                <span className={'main'}>&darr; {statsKr[index]}</span>
-                                <br/><span className={'sub'}>({stats[index]})</span></div>
-                        </th>)}
-                </tr>
-                </thead>
-                <tbody>
-                {stats.map((increaseStat, rowIndex) => (
-                    <tr key={rowIndex}>
-                        <th key={increaseStat}>
-                            <div className={`${increaseStat} decrease`}>
-                                <span className={'main'}>&uarr; {statsKr[rowIndex]}</span>
-                                <br/><span className={`sub`}>({stats[rowIndex]})</span>
-                            </div>
-                        </th>
+        <TableContainer>
+            <thead>
+            <tr>
+                <th></th>
+                {stats.map((stat, index) =>
+                    <th key={stat} className={`${stat} decrease`}>
+                        <span className={'main'}>&darr; {statsKr[index]}</span>
+                        <br/><span className={'sub'}>({stats[index]})</span>
+                    </th>)}
+            </tr>
+            </thead>
+            <tbody>
+            {stats.map((increaseStat, rowIndex) => (
+                <tr key={rowIndex}>
+                    <th key={increaseStat} className={`${increaseStat} decrease`}>
+                        <span className={'main'}>&uarr; {statsKr[rowIndex]}</span>
+                        <br/><span className={`sub`}>({stats[rowIndex]})</span>
+                    </th>
 
-                        {stats.map((decreaseStat) => getNatureCell(increaseStat, decreaseStat))}
-                    </tr>
-                ))}
-                </tbody>
-            </StyledTable>
-        </div>
+                    {stats.map((decreaseStat) => getNatureCell(increaseStat, decreaseStat))}
+                </tr>
+            ))}
+            </tbody>
+        </TableContainer>
     );
 };
-
-
-const StyledTable = styled.table`
-  .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  table {
-    border-collapse: collapse;
-  }
-
-  th, td {
-    width: 100px;
-    height: 24px;
-    text-align: center;
-    vertical-align: middle;
-
-    .main {
-      color: #000000FF;
-      font-weight: 400;
-    }
-
-    .sub {
-      color: #00000090;
-      font-size: 14px;
-      font-weight: 400;
-    }
-  }
-
-  td, th {
-    border: 1px solid #00000030;
-  }
-
-  //th {
-  //  border: 1px solid #FFFFFF30;
-  //}
-
-  td div, th div {
-    margin: 2px 2px;
-    padding: 4px 0;
-    border-radius: 4px;
-  }
-
-  .Attack {
-    background-color: #fed7aa
-  }
-
-  .Defense {
-    background-color: #fef08a
-  }
-
-  .Sp-Attack {
-    background-color: #bfdbfe;
-  }
-
-  .Sp-Defense {
-    background-color: #a7f3d0;
-  }
-
-  .Speed {
-    background-color: #fecdd3;
-  }
-`
 
 export default Nature;
