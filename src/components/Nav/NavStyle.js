@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {MEDIA} from "../../css/media.js";
 
 export const NavContainer = styled.nav`
   display: flex;
@@ -6,6 +7,10 @@ export const NavContainer = styled.nav`
   font-size: 14px;
   margin: 0 6px 6px 8px;
   font-weight: 500;
+
+  #nav-toggle {
+    display: none;
+  }
 
   img {
     height: 14px;
@@ -34,5 +39,31 @@ export const NavContainer = styled.nav`
   & a.active {
     color: #4CAF50;
     font-weight: 600;
+  }
+
+  @media (${MEDIA.mobile}) {
+    justify-content: center;
+    #nav-logo {
+      display: none;
+    }
+
+    #nav-toggle {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background-color: hotpink;
+      border-radius: 120px;
+      width: 32px;
+      height: 32px;
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+
+      #nav-toggle-icon {
+        padding: 4px;
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 `

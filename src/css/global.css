@@ -1,8 +1,13 @@
+body.extension {
+    width: 620px;
+}
+
 body {
-    width: 620px; /* 원하는 width 값으로 변경 */
+    max-width: 620px;
     padding: 8px;
     color: black;
 }
+
 
 a, button {
     color: black;
