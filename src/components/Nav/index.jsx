@@ -1,14 +1,23 @@
 import {NavLink} from "react-router-dom";
 import {useLanguage} from "../../contexts/LanguageContextProvider.jsx";
-import {NavContainer} from "../../css/NavStyle.js";
+import {NavContainer} from "./NavStyle.js";
 import {LANGUAGES, NATIVES, NAV_LANGUAGE} from "../../data/languages.js";
+import {LuMenu} from "react-icons/lu";
+import {useState} from "react";
 
 const Nav = () => {
     const {language, setLanguage} = useLanguage();
+    const [toggle, setToggle] = useState(false);
 
     return <NavContainer>
-        <img src={'/logo.png'} alt="logo"/>
-        <div>
+        <div onClick={() => setToggle(true)}
+             id={'nav-toggle'}
+             className={toggle ? 'toggled' : ''}>
+            <LuMenu id={'nav-toggle-icon'}/>
+        </div>
+
+        <img id={'nav-logo'} src={'/logo.png'} alt="logo"/>
+        <div id={'nav-list'}>
             <NavLink to="/" className={({isActive}) => (isActive ? 'active' : '')}>
                 {NAV_LANGUAGE[language][0]}
             </NavLink>
