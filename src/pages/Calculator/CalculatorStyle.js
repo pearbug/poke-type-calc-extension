@@ -74,9 +74,9 @@ export const MidContainer = styled.div`
       background-color: #4CAF50; /* 예시로 배경색을 초록색으로 지정 */
       color: white; /* 텍스트 색상 */
       border: 1px solid #4CAF50; /* 테두리 */
+      border-radius: 4px;
     }
   }
-
 
   #selectedType {
     display: flex;
@@ -102,6 +102,11 @@ export const MidContainer = styled.div`
       width: 18px;
       height: 18px;
     }
+  }
+
+  .trashButton {
+    color: #00000050;
+    cursor: pointer;
   }
 `
 
