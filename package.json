@@ -4,16 +4,10 @@
   "version": "0.2.3",
   "type": "module",
   "scripts": {
-    "dev": "vite --mode extensions",
-    "build": "vite build --mode extensions && vite build --mode deploy",
+    "dev": "vite",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "dev-d": "vite --mode deploy",
-    "dev-e": "vite --mode extensions",
-    "build-d": "vite build --mode deploy",
-    "build-e": "vite build --mode extensions",
-    "preview-d": "vite preview --mode deploy",
-    "preview-e": "vite preview --mode extensions"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
