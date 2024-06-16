@@ -1,20 +1,20 @@
 import './css/reset.css'
-import './index.css'
+import './css/global.css'
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
-import Calculator from "./pages/Calculator.jsx";
-import Nature from "./pages/Nature.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import BaseStats from "./pages/BaseStats.jsx";
-import {StyledNav} from "./css/StyledNav.js";
-
+import BaseStats from "./pages/BaseStats/index.jsx";
+import Calculator from "./pages/Calculator/index.jsx";
+import Nature from "./pages/Nature/index.jsx";
+import logo from "../public/logo.png";
+import {NavContainer} from "./css/NavStyle.js";
 
 function App() {
 
     return (
         <>
             <BrowserRouter>
-                <StyledNav>
-                    <img src={`logo.png`} alt="logo"/>
+                <NavContainer>
+                    <img src={logo} alt="logo"/>
                     <div>
                         <NavLink to="/" className={({isActive}) => (isActive ? 'active' : '')}>
                             상성계산기
@@ -26,7 +26,7 @@ function App() {
                             종족값검색
                         </NavLink>
                     </div>
-                </StyledNav>
+                </NavContainer>
 
                 <Routes>
                     <Route path={'/'} element={<Calculator/>}/>

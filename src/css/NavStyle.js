@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledNav = styled.nav`
+export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   font-size: 14px;
