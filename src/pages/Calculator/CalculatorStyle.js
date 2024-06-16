@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {MEDIA} from "../../css/media.js";
 
 export const CalculatorContainer = styled.div`
   display: flex;
@@ -29,6 +30,12 @@ export const TypeSelectContainer = styled.div`
     background-color: #e2e8f090;
     gap: 4px;
 
+    &:hover {
+      border: 2px solid #60a5fa;
+      color: #f8fafc;
+      background-color: rgb(59, 130, 246);
+    }
+
     &.checked {
       border: 2px solid #60a5fa;
       color: #f8fafc;
@@ -55,9 +62,9 @@ export const MidContainer = styled.div`
   /*중단 선택확인 및 모드버튼부분*/
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
   align-items: center;
-
   margin: 8px 0 0 0;
   padding: 10px 0;
   border-top: 1px solid #00000020;
@@ -76,13 +83,21 @@ export const MidContainer = styled.div`
       border: 1px solid #4CAF50; /* 테두리 */
       border-radius: 4px;
     }
+
+    &:hover {
+      display: inline-block;
+      background-color: #4CAF50; /* 예시로 배경색을 초록색으로 지정 */
+      color: white; /* 텍스트 색상 */
+      border: 1px solid #4CAF50; /* 테두리 */
+      border-radius: 4px;
+    }
   }
 
   #selectedType {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0;
-
 
     button {
       color: #000000;
@@ -107,6 +122,11 @@ export const MidContainer = styled.div`
   .trashButton {
     color: #00000050;
     cursor: pointer;
+    height: 24px;
+
+    &:hover {
+      color: #4CAF50;
+    }
   }
 `
 
@@ -216,6 +236,36 @@ export const ResultContainer = styled.div`
     }
   }
 
+  @media (${MEDIA.mobile}) {
+    button {
+      position: relative;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+
+      div {
+        display: none;
+      }
+
+      &:hover div {
+        display: block;
+        background: #FFFFFF79;
+        border: 2px solid #00000010;
+        border-radius: 16px;
+        font-size: 20px;
+        backdrop-filter: blur(10px);
+        padding: 16px 24px;
+        z-index: 1;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
 
 
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 `
