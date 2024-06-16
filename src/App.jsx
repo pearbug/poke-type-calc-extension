@@ -1,32 +1,19 @@
 import './css/reset.css'
 import './css/global.css'
-import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NotFound from "./pages/NotFound.jsx";
 import BaseStats from "./pages/BaseStats/index.jsx";
 import Calculator from "./pages/Calculator/index.jsx";
 import Nature from "./pages/Nature/index.jsx";
-import logo from "../public/logo.png";
-import {NavContainer} from "./css/NavStyle.js";
+import {LanguageContextProvider} from "./contexts/LanguageContextProvider.jsx";
+import Nav from "./components/Nav/index.jsx";
 
 function App() {
 
     return (
-        <>
+        <LanguageContextProvider>
             <BrowserRouter>
-                <NavContainer>
-                    <img src={logo} alt="logo"/>
-                    <div>
-                        <NavLink to="/" className={({isActive}) => (isActive ? 'active' : '')}>
-                            상성계산기
-                        </NavLink>
-                        <NavLink to="/nature" className={({isActive}) => (isActive ? 'active' : '')}>
-                            성격표
-                        </NavLink>
-                        <NavLink to="/base-stats" className={({isActive}) => (isActive ? 'active' : '')}>
-                            종족값검색
-                        </NavLink>
-                    </div>
-                </NavContainer>
+                <Nav/>
 
                 <Routes>
                     <Route path={'/'} element={<Calculator/>}/>
@@ -36,7 +23,7 @@ function App() {
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>
-        </>
+        </LanguageContextProvider>
     )
 }
 
