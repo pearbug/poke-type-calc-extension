@@ -33,9 +33,9 @@ const Calculator = () => {
     }
 
     // language button event
-    // function onClickLanguageButton(e) {
-    //     setI18nLanguage(e.target.value)
-    // }
+    function onClickLanguageButton(e) {
+        setI18nLanguage(e.target.value)
+    }
 
     // 공격 모드에 따라 계산 후 출력
     useEffect(function displayCalculateResult() {
@@ -120,10 +120,10 @@ const Calculator = () => {
                     </li>)}
             </ul>
         </ResultContainer>
-        {/*<select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>*/}
-        {/*    <option value="ko-KR">Korean</option>*/}
-        {/*    <option value="en-US">English</option>*/}
-        {/*</select>*/}
+        <select id="dropdown" name="dropdown" onChange={onClickLanguageButton}>
+            <option value="ko-KR">Korean</option>
+            <option value="en-US">English</option>
+        </select>
     </CalculatorContainer>
 }
 
