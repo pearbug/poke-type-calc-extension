@@ -29,6 +29,12 @@ export const TypeSelectContainer = styled.div`
     background-color: #e2e8f090;
     gap: 4px;
 
+    &:hover {
+      border: 2px solid #60a5fa;
+      color: #f8fafc;
+      background-color: rgb(59, 130, 246);
+    }
+
     &.checked {
       border: 2px solid #60a5fa;
       color: #f8fafc;
@@ -57,7 +63,7 @@ export const MidContainer = styled.div`
   justify-content: center;
   width: 100%;
   align-items: center;
-
+  height: 20px;
   margin: 8px 0 0 0;
   padding: 10px 0;
   border-top: 1px solid #00000020;
@@ -70,6 +76,14 @@ export const MidContainer = styled.div`
     color: #00000090;
 
     &.active {
+      display: inline-block;
+      background-color: #4CAF50; /* 예시로 배경색을 초록색으로 지정 */
+      color: white; /* 텍스트 색상 */
+      border: 1px solid #4CAF50; /* 테두리 */
+      border-radius: 4px;
+    }
+
+    &:hover {
       display: inline-block;
       background-color: #4CAF50; /* 예시로 배경색을 초록색으로 지정 */
       color: white; /* 텍스트 색상 */
@@ -107,6 +121,10 @@ export const MidContainer = styled.div`
   .trashButton {
     color: #00000050;
     cursor: pointer;
+
+    &:hover {
+      color: #4CAF50;
+    }
   }
 `
 
