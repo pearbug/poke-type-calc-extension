@@ -1,11 +1,7 @@
 {
   "name": "poke-type-calc-extension",
   "private": true,
-<<<<<<< HEAD
   "version": "0.2.2",
-=======
-  "version": "0.2.1",
->>>>>>> e3cfc650a5c348246abbd960031bf53a0cb0be2e
   "type": "module",
   "scripts": {
     "dev": "vite --mode extensions",
@@ -22,10 +18,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-icons": "^5.2.1",
-=======
->>>>>>> e3cfc650a5c348246abbd960031bf53a0cb0be2e
     "react-router-dom": "^6.23.1",
     "styled-components": "^6.1.11"
   },
