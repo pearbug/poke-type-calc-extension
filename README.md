@@ -5,7 +5,7 @@ Calculates strengths and weaknesses for Pokémon types.
 # 구동
 
 ```
-npm i
+npm install
 ```
 
 # 실행
