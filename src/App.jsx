@@ -17,7 +17,7 @@ function App() {
                 <Route path="/index.html" element={<Navigate to="/"/>}/>
                 <Route path={'/nature'} element={<Nature/>}/>
                 <Route path={'/base-stats'} element={<BaseStats/>}/>
-                <Route path={'*'} element={<NotFound/>}/>
+                <Route path={'/*'} element={<NotFound/>}/>
             </Routes>
         </Provider>
     )
